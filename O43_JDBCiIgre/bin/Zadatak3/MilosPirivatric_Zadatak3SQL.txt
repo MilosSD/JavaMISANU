@@ -1,0 +1,9 @@
+CREATE DATABASE biblioteke;
+
+CREATE TABLE spisakbiblioteka (
+	bibliotekaID int PRIMARY KEY AUTO_INCREMENT,
+	imeBiblioteke varchar(45),
+	ulica varchar(45),
+	broj varchar(10)
+) ENGINE = INNODB;
+
