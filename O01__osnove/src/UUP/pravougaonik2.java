@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class pravougaonik2 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		/*Napisati program kojim se logi?koj promenljivoj p dodeljuje vrednost true, 
+ako se pravougaonik sa stranicama a i b može ceo smestiti u pravougaonik sa stranica*/
 		Scanner input = new Scanner(System.in);
 
 		System.out.print("Unesite stranicu trougla a: ");

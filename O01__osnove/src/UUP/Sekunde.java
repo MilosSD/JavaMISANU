@@ -2,6 +2,8 @@ package UUP;
 import java.util.Scanner; 
 public class Sekunde { 
 	public static void main(String[] args) { 
+		//Putovanje traje n sekundi. Napisati program za izra?unavanje koliko je to sati, minuta i sekundi.
+
 		Scanner input = new Scanner(System.in); 
 		
 		System.out.println("Proteklo sekundi: "); 

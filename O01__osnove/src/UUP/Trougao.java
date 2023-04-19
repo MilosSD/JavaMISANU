@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class Trougao {
 
 	public static void main(String[] args) {
+
+		//Napisati program kojim se izra?unava obim i površina trougla na osnovu unetih stranica trougla.
+
 		Scanner input = new Scanner(System.in);
 		System.out.println("Unesite stranice trougla a, b, c ");
 		double a = input.nextDouble();

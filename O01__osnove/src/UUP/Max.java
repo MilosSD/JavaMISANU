@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Max {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//Napisati program kojim se za unete vrednosti a i b izra?unava y prema formuli y = 5 + max(a2, b2).
 
 		Scanner input = new Scanner(System.in);
 

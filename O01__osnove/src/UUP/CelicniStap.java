@@ -3,6 +3,10 @@ import java.io.*;
 import java.text.DecimalFormat; 
 
 public class CelicniStap { public static void main(String[] args) throws Exception { 
+		
+		/*?eli?ni �tap kvadratnog popre?nog preseka stranice A = 1cm1, du�ine L + 30cm, modula elasti?nosti E + 2 * 104kN / cm2, pod dejstvom aksijalne sile F izdu�i se za ? = 3,2 - 10 -2cm, dok u popre?nom preseku nastaje kontrakcija ?a = 3 * 10-4cm2.
+Sastaviti algoritam i napisati program za odre?ivanje intenziteta aksijalne sile F i Poasonovog kofecijenta u.*/
+
 		// A – površina poprečnog preseka štapa 
 		// L - dužina štapa 
 		// E - modul elastičnosti materijala 

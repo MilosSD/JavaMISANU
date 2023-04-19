@@ -1,6 +1,9 @@
 package UUP; 
 import java.util.Scanner; 
 public class Ugao { public static void main(String[] args) {
+
+	//Napisati program za izra?unavanje sinusa i kosinusa ugla zadatog u radijanima.
+
 	Scanner input = new Scanner(System.in); 
 		
 	System.out.print("Unesite vrednost ugla u radijanima: "); 

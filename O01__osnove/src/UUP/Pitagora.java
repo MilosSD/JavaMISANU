@@ -3,6 +3,9 @@ package UUP;
 public class Pitagora {
 
 	public static void main(String[] args) {
+
+		//Napisati program za koriš?enje Pitagorine teoreme za izra?unavanje dužine hipotenuze na osnovu dužina kateta trougla.
+
 		double x, y ,z ;
 		x= 3;
 		y=4;

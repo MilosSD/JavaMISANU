@@ -3,7 +3,8 @@ package UUP;
 public class OsnovniTipPodatka {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// Napisati program za štampanje maksimalnih i minimalnih vrednosti primitivnih tipova podataka koriš?enjem klasa omota?a.
+
 		System.out.println("Tip\tInterval vrednosti"); 
 		System.out.println("byte\t" + Byte.MIN_VALUE + " - " + Byte.MAX_VALUE); 
 		System.out.println("short\t" + Short.MIN_VALUE + " - " + Short.MAX_VALUE);

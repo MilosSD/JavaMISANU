@@ -7,6 +7,8 @@ public class BMI {
 
 	public static void main(String[] args) {
 
+		//Napisati program koji za unetu visinu i masu izra?unava indeks telesne mase BMI = m[kg]/(h[m])2
+
 		Scanner input = new Scanner(System.in);
 		DecimalFormat df = new DecimalFormat("#.####");
 

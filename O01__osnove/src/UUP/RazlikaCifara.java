@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class RazlikaCifara {
 
 	public static void main(String[] args) {
+		
+		//Napisati program kojim se unosi dvocifreni broj i izra?unava razlika cifara desetica i jedinica.
 
 		Scanner input = new Scanner(System.in); 
 

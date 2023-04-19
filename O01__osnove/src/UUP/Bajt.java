@@ -6,6 +6,8 @@ public class Bajt {
 
 	public static void main(String[] args) {
 		
+		//Napisati program za pretvaranje veli?ine fajla izražene u kilobajtima u veli?inu u bajtima.
+		
 		Scanner input = new Scanner (System.in);
 		
 		System.out.print("Unesite vrednost u kilobajtima: "); 

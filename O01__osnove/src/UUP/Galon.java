@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class Galon {
 
 	public static void main(String[] args) {
+		
+		//Napisati program za pretvaranje galona u litre. Napomena: 1 galon = 4,54 l.
+
 		Scanner input = new Scanner (System.in); 
 		System.out.print("Unesite zapreminu u galonima: "); 
 		double g = input.nextDouble(); 

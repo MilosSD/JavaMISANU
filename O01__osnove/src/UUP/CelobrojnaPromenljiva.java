@@ -3,6 +3,8 @@ package UUP;
 public class CelobrojnaPromenljiva {
 
 	public static void main(String[] args) {
+		
+		//Napisati kod koji prikazuje promenjive celobrojnog tipa.
 		byte b = 120; 
 		short s = 5200; 
 		int i = 100200; 

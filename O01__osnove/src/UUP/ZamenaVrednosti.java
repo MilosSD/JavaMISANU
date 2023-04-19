@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class ZamenaVrednosti {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//Napisati program koji izvodi zamenu vrednosti dva broja koriš?enjem privremene promenljive.
+
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Unesite brojeve x,y: ");

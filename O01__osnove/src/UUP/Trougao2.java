@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class Trougao2 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//Napisati program kojim se logi?koj promenljivoj p dodeljuje vrednost true, ako se od odse?aka sa dužinama x, y, z može konstruisati trougao.
+
 		Scanner input = new Scanner(System.in);
 
 		System.out.print("Unesite stranicu trougla x: ");

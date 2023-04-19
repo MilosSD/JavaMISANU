@@ -5,7 +5,9 @@ import java.util.Scanner;
 public class ZbirCifara {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		/*Sastaviti algoritam i napisati program za izra?unavanje zbira zna?ajnih cifara proizvoljnog trocifrenog broja datog na ulazu. 
+Na izlazu odštampati traženi zbir.*/
+
 		Scanner input = new Scanner(System.in);
 
 		System.out.print("Unesite trocifren broj n: ");

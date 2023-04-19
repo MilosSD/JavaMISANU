@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class TrocifrenBroj {
 
 	public static void main(String[] args) {
+		
+		//Napisati program za izdvajanje cifara trocifrenog broja.
 
 		Scanner input = new Scanner(System.in);
 

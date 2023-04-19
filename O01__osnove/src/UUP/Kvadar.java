@@ -6,6 +6,9 @@ public class Kvadar {
 
 	public static void main(String[] args) {
 
+		/*Sastaviti algoritam i napisati program kojim se na osnovu unetih stranica kvadra izra?unava površina i zapremina. 
+Na izlazu štampati površinu i zapreminu kvadra.*/
+
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Unesite vrednost stranice a : ");

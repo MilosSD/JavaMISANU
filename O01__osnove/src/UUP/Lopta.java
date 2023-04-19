@@ -4,6 +4,9 @@
  
  public class Lopta { 
 	 public static void main(String[] args) { 
+
+		//Napisati program kojim se izra?unava površina i zapremina lopte na osnovu unetog polupre?nika.
+
 		 Scanner input = new Scanner(System.in); 
 		
 		 System.out.println("Unesite vrednost polupreÄnika: ");

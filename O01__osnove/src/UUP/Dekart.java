@@ -7,7 +7,11 @@ import java.text.DecimalFormat;
 public class Dekart {
 
 	public static void main(String[] args) throws Exception {
-		// TODO Auto-generated method stub
+		/*Sastaviti algoritam i napisati program kojim se izra?unavaju Dekartove koordinate sile inteziteta F = 6kN, ako je ugao ? = 60° izmedju sile F i koordinate ose. Na izlazu štampati vrednost Dekartovih koordinata.
+Dekartove koordinate sile F na koordinatne ose odre?uju se izrazima
+X = F * cos ?
+Y = F * sin ? */
+
 		double f, alfa, x, y;
 
 		DecimalFormat df = new DecimalFormat("#.##");

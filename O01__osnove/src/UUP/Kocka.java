@@ -6,7 +6,9 @@ import java.util.Scanner;
 public class Kocka {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		/*Sastaviti algoritam i napisati program kojim se na osnovu unete stranice kocke a izra?unava površina i zapremina. 
+Na izlazu štampati površinu i zapreminu kocke.*/
+
 		Scanner input = new Scanner(System.in);
 		DecimalFormat df = new DecimalFormat("#.##");
 		System.out.print("Unesite duzinu stranice a : ");
