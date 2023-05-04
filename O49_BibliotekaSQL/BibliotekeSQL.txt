@@ -1,0 +1,196 @@
+CREATE DATABASE Biblioteke
+
+CREATE TABLE IF NOT EXISTS`Biblioteke` (
+  `bibliotekaID` INT NOT NULL AUTO_INCREMENT,
+  `naziv` VARCHAR(45) NULL,
+  `telefon` VARCHAR(45) NULL,
+  `ulica` VARCHAR(45) NULL,
+  `broj` VARCHAR(45) NULL,
+  `mesto` VARCHAR(45) NULL,
+  PRIMARY KEY (`bibliotekaID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `clanovi` (
+  `brClanskeKarte` INT NOT NULL,
+  `ime` VARCHAR(45) NULL,
+  `prezime` VARCHAR(45) NULL,
+  `datumrodj` DATE NULL,
+  `telefon` VARCHAR(45) NULL,
+  `ulica` VARCHAR(45) NULL,
+  `broj` VARCHAR(45) NULL,
+  `bibliotekaID`
+    FOREIGN KEY (`bibliotekaID`)
+    REFERENCES`Biblioteke` (`bibliotekaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `bibliotekari` (
+  `bibliotekarID` INT NOT NULL,
+  `ime` VARCHAR(45) NULL,
+  `prezime` VARCHAR(45) NULL,
+  `telefon` VARCHAR(45) NULL,
+  `ulica` VARCHAR(45) NULL,
+  `broj` VARCHAR(45) NULL,
+  `bibliotekaID` INT NULL,
+  PRIMARY KEY (`bibliotekarID`),
+  INDEX `bib_idx` (`bibliotekaID` ASC) VISIBLE,
+  CONSTRAINT `bib`
+    FOREIGN KEY (`bibliotekaID`)
+    REFERENCES `Biblioteke` (`bibliotekaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `izdavanja` (
+  `izdavanjeID` INT NOT NULL,
+  `datumizdavanja` DATE NULL,
+  `datumvracanja` DATE NULL,
+  `brClanskeKarte` INT NULL,
+  `bibliotekarID` INT NULL,
+  `ISBN` INT NULL,
+  PRIMARY KEY (`izdavanjeID`),
+  INDEX `clanovi_idx` (`brClanskeKarte` ASC) VISIBLE,
+  INDEX `bibliotekar_idx` (`bibliotekarID` ASC) VISIBLE,
+  CONSTRAINT `clanovi`
+    FOREIGN KEY (`brClanskeKarte`)
+    REFERENCES `clanovi` (`brClanskeKarte`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `bibliotekar`
+    FOREIGN KEY (`bibliotekarID`)
+    REFERENCES `bibliotekari` (`bibliotekarID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+	FOREIGN KEY (`ISBN`)
+    REFERENCES `knjige` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `knjige` (
+  `ISBN` INT NOT NULL,
+  `naziv` VARCHAR(45) NULL,
+  `jezik` VARCHAR(45) NULL,
+  `izdavac` VARCHAR(45) NULL,
+  PRIMARY KEY (`ISBN`),
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `autori` (
+  `autorID` INT NOT NULL,
+  `ime` VARCHAR(45) NULL,
+  `prezime` VARCHAR(45) NULL,
+  PRIMARY KEY (`autorID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `decijeodeljenje` (
+  `decijeId` INT NOT NULL,
+  `uzrast` VARCHAR(45) NULL,
+  `bibliotekaID` INT NULL,
+  `ISBN` INT NULL,
+  PRIMARY KEY (`decijeId`),
+  INDEX `biblioteka_idx` (`bibliotekaID` ASC) VISIBLE,
+  INDEX `knjge_idx` (`ISBN` ASC) VISIBLE,
+    FOREIGN KEY (`bibliotekaID`)
+    REFERENCES `Biblioteke` (`bibliotekaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `knjge`
+    FOREIGN KEY (`ISBN`)
+    REFERENCES `knjige` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `naucnoodeljenje` (
+  `naucnoID` INT NOT NULL,
+  `naucnaOblast` VARCHAR(45) NULL,
+  `bibliotekaID` INT NULL,
+  `ISBN` INT NULL,
+  PRIMARY KEY (`naucnoID`),
+  INDEX `biblioteka_idx` (`bibliotekaID` ASC) VISIBLE,
+  INDEX `knj_idx` (`ISBN` ASC) VISIBLE,
+    FOREIGN KEY (`bibliotekaID`)
+    REFERENCES `Biblioteke` (`bibliotekaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+    FOREIGN KEY (`ISBN`)
+    REFERENCES `knjige` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `pozajmnoodeljenje` (
+  `pozajmnoID` INT NOT NULL,
+  `aktuelnost` VARCHAR(45) NULL,
+  `bibliotekaID` INT NULL,
+  `ISBN` INT NULL,
+  `zanr` VARCHAR(45) NULL,
+  PRIMARY KEY (`pozajmnoID`),
+  INDEX `bib_idx` (`bibliotekaID` ASC) VISIBLE,
+  INDEX `knjig_idx` (`ISBN` ASC) VISIBLE,
+    FOREIGN KEY (`bibliotekaID`)
+    REFERENCES `Biblioteke` (`bibliotekaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+    FOREIGN KEY (`ISBN`)
+    REFERENCES `knjige` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `autoriknjige` (
+  `autoriknjigeID` INT NOT NULL AUTO_INCREMENT,
+  `autorID` INT NULL,
+  `ISBN` INT NULL,
+  PRIMARY KEY (`autoriknjigeID`),
+  INDEX `knjige_idx` (`ISBN` ASC) VISIBLE,
+  INDEX `autori_idx` (`autorID` ASC) VISIBLE,
+    FOREIGN KEY (`ISBN`)
+    REFERENCES `knjige` (`ISBN`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+    FOREIGN KEY (`autorID`)
+    REFERENCES `autori` (`autorID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+INSERT INTO `biblioteke`( `naziv`, `telefon`, `ulica`, `broj`, `mesto`) 
+VALUES ('Gradska biblioteka','026/654545','Karadjordjeva','24','Smederevo'),
+('Biblioteka "Vek Karadzic"','026/222333','Proleterska','50','Smederevo')
+
+INSERT INTO `clanovi`(`brClanskeKarte`, `ime`, `prezime`, `datumrodj`, `telefon`, `ulica`, `broj`, `bibliotekaID`)
+VALUES ('11112','Nemanja','Nemanjic','1988-12-24','064/111222','Kralja Petra','5', 1), 
+('11113','Ana','Anic','1989-02-24','064/222333','Kralja Milana','69', 1)
+
+INSERT INTO `bibliotekari`(`bibliotekarID`, `ime`, `prezime`, `telefon`, `ulica`, `broj`, `bibliotekaID`) 
+VALUES (1,'Rade','Rankovic','026/123321','Mostarska','14',1), 
+(2,'Ljiljana','Knezevic','026/888999','16. Oktobra','6/14',2)
+
+INSERT INTO `autori`(`autorID`, `ime`, `prezime`) 
+VALUES (1,'Ljubivoje','Rsumovic'), (2,'Ivo','Andric')
+(3,'N. A.',' Maskin'),  (4,'Dzordz R. R.',' Martin')1
+
+INSERT INTO `knjige`(`ISBN`, `naziv`, `jezik`, `izdavac`) 
+VALUES (1234,'Bukvar decjih prava','srpski','Prosveta'),
+(4567,'Na Drini cuprija','srpski','Laguna')
+(1111,'Istorija Starog Rima','srpskohrvatski','NOLIT'), 
+(2222,'Igra prestola','srpski','Laguna')
+
+INSERT INTO `decijeodeljenje`(`decijeId`, `uzrast`, `bibliotekaID`, `ISBN`) 
+VALUES (1,'5-15',1,1234), (2,'5-15',2,1234)
+
+INSERT INTO `naucnoodeljenje`(`naucnoID`, `naucnaOblast`, `bibliotekaID`, `ISBN`) 
+VALUES (1,'Istorija',1,1111), (2,'Istorija',2,1111)
+
+INSERT INTO `pozajmnoodeljenje`(`pozajmnoID`, `aktuelnost`, `bibliotekaID`, `ISBN`, `zanr`)
+ VALUES (1,'najcitanije',1,2222,'Espka fantastika'), 
+(2,'najcitanije',2,2222,'Espka fantastika')
+
+INSERT INTO `izdavanja`(`izdavanjeID`, `datumizdavanja`, `datumvracanja`, `brClanskeKarte`, `bibliotekarID`, `ISBN`)
+ VALUES (1,'2023-04-01','2024-04-15',11112,1,1111), 
+(2,'2023-03-01','2024-02-15',11113,2,4567)
+
+INSERT INTO `autoriknjige`(`autoriknjigeID`, `autorID`, `ISBN`) 
+VALUES (1,1,1234), (2,2,4567), (3,3,1111), (4,4,2222)
