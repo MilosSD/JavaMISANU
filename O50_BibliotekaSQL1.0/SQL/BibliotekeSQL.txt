@@ -1,0 +1,174 @@
+Опис задатка: Библиотека се карактерише следећим релеватним подацима: назив, адреса, место, телефон. 
+У библиотеци се за све чланове, приликом уписа, евидентирају следећи подаци: име, презиме, датум рођења, телефон (уколико га особа поседује), број чланске карте и адреса пребивалишта. 
+Библиотека поседује књиге, које се јединствено идентификују својим ИСБН бројем, а остали подаци од значаја за информациони систем су: 
+назив, језик, издавач, као и имена и презимена аутора. 
+Књигу мора написати бар један писац, али може и више писаца да буде аутор једне књиге. 
+У базу података уводимо само оне писце чије књиге библиотека поседује. 
+Књига се мора налазити на дечијем, позајмном или научном одељењу. 
+Уколико је на дечијем одељењу, у базу се уписује још и узраст за који је намењена, на позајмном актуелност и жанр, док на научном одељењу знамо назив научне области којој иста припада. 
+Књиге се члановима могу изнајмљивати само од стране библиотекара који раде у библиотеци (у којој мора радити најмање један библиотекар) и том приликом се евидентира који члан је узео књигу,
+датум издавања и када се врати књига датум враћања. За библиотекаре знамо име, презиме, шифру запосленог, адресу, јмбг и евентуално телефон. 
+Један библиотекар може издати члановима више књига, али не мора можда ниједну. 
+Члан библиотеке не мора задужити ниједну књигу приликом уписа, а може позајмити и више књига одједном.
+
+CREATE DATABASE biblioteke;
+
+CREATE TABLE IF NOT EXISTS `Biblioteke` (
+  `bibliotekaID` INT NOT NULL AUTO_INCREMENT,
+  `naziv` VARCHAR(45) NULL,
+  `telefon` VARCHAR(45) NULL,
+  `ulica` VARCHAR(45) NULL,
+  `broj` VARCHAR(45) NULL,
+  `mesto` VARCHAR(45) NULL,
+  PRIMARY KEY (`bibliotekaID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `clanovi` (
+  `clanID` INT NOT NULL AUTO_INCREMENT,
+  `brClanskeKarte` BIGINT NOT NULL ,
+  `ime` VARCHAR(45) NULL,
+  `prezime` VARCHAR(45) NULL,
+  `datumrodj` DATE NULL,
+  `telefon` VARCHAR(45) NULL,
+  `ulica` VARCHAR(45) NULL,
+  `broj` VARCHAR(45) NULL,
+  PRIMARY KEY (`clanID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `knjige` (
+  `knjigaID` INT NOT NULL AUTO_INCREMENT,
+  `ISBN` VARCHAR(45) NULL,
+  `naziv` VARCHAR(45) NULL,
+  `jezik` VARCHAR(45) NULL,
+  `izdavac` VARCHAR(45) NULL,
+  `decijeID` INT NULL,
+  `naucnoID` INT NULL,
+  `pozajmnoID` INT NULL,
+  PRIMARY KEY (`knjigaID`)
+  FOREIGN KEY (decijeID)
+	REFERENCES decijeodeljenje(decijeID)
+	ON DELETE NO ACTION
+    ON UPDATE CASCADE
+	FOREIGN KEY (naucnoID)
+	REFERENCES naucnoodeljenje(naucnoID)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE
+	FOREIGN KEY (pozajmnoID)
+	REFERENCES pozajmnoodeljenje(pozajmnoID)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `autori` (
+  `autorID` INT NOT NULL AUTO_INCREMENT,
+  `ime` VARCHAR(45) NULL,
+  `prezime` VARCHAR(45) NULL,
+  PRIMARY KEY (`autorID`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `bibliotekari` (
+  `bibliotekarID` INT NOT NULL AUTO_INCREMENT,
+  `ime` VARCHAR(45) NULL,
+  `prezime` VARCHAR(45) NULL,
+  `telefon` VARCHAR(45) NULL,
+  `ulica` VARCHAR(45) NULL,
+  `broj` VARCHAR(45) NULL,
+  `bibliotekaID` INT NULL,
+  PRIMARY KEY (`bibliotekarID`),
+    FOREIGN KEY (`bibliotekaID`)
+    REFERENCES `Biblioteke` (`bibliotekaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `izdavanja` (
+  `izdavanjeID` INT NOT NULL AUTO_INCREMENT,
+  `datumizdavanja` DATE NULL,
+  `datumvracanja` DATE NULL,
+  `bibliotekarID` INT NULL,
+  `knjigaID` INT NULL,
+  `clanID` INT NULL,
+  PRIMARY KEY (`izdavanjeID`),
+  CONSTRAINT `bibliotekar`
+    FOREIGN KEY (`bibliotekarID`)
+    REFERENCES `bibliotekari` (`bibliotekarID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `knjiga`
+    FOREIGN KEY (`knjigaID`)
+    REFERENCES `knjige` (`knjigaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `clan`
+    FOREIGN KEY (`clanID`)
+    REFERENCES `clanovi` (`clanID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `decijeodeljenje` (
+  `decijeId` INT NOT NULL AUTO_INCREMENT,
+  `uzrast` VARCHAR(45) NULL,
+  PRIMARY KEY (`decijeId`),
+  CONSTRAINT `decijeKnjiga`
+    FOREIGN KEY (`decijeId`)
+    REFERENCES `knjige` (`knjigaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `naucnoodeljenje` (
+  `naucnoID` INT NOT NULL AUTO_INCREMENT,
+  `naucnaOblast` VARCHAR(45) NULL,
+  PRIMARY KEY (`naucnoID`),
+  CONSTRAINT `naucnoKnjiga`
+    FOREIGN KEY (`naucnoID`)
+    REFERENCES `knjige` (`knjigaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `pozajmnoodeljenje` (
+  `pozajmnoID` INT NOT NULL AUTO_INCREMENT,
+  `aktuelnost` VARCHAR(45) NULL,
+  `zanr` VARCHAR(45) NULL,
+  PRIMARY KEY (`pozajmnoID`),
+  CONSTRAINT `pozajmnoKnjiga`
+    FOREIGN KEY (`pozajmnoID`)
+    REFERENCES `knjige` (`knjigaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `autoriknjige` (
+  `autoriknjigeID` INT NOT NULL AUTO_INCREMENT,
+  `knjigaID` INT NULL,
+  `autorID` INT NULL,
+  PRIMARY KEY (`autoriknjigeID`),
+    FOREIGN KEY (`autorID`)
+    REFERENCES `autori` (`autorID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+    FOREIGN KEY (`knjigaID`)
+    REFERENCES `knjige` (`knjigaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `clanovibiblioteke` (
+  `clanovibibliotekeID` INT NOT NULL AUTO_INCREMENT,
+  `datumupisa` DATE NULL,
+  `bibliotekaID` INT NULL,
+  `clanID` INT NULL,
+  PRIMARY KEY (`clanovibibliotekeID`),
+  CONSTRAINT `BiliotekaClan`
+    FOREIGN KEY (`bibliotekaID`)
+    REFERENCES `Biblioteke` (`bibliotekaID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE,
+  CONSTRAINT `ClanBiblioteka`
+    FOREIGN KEY (`clanID`)
+    REFERENCES `clanovi` (`clanID`)
+    ON DELETE NO ACTION
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;

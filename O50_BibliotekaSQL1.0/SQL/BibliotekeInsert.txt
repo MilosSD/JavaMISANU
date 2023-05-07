@@ -1,0 +1,41 @@
+INSERT INTO `biblioteke`( `naziv`, `telefon`, `ulica`, `broj`, `mesto`) 
+VALUES ('Gradska biblioteka','026/654545','Karadjordjeva','24','Smederevo'),
+('Biblioteka "Vek Karadzic"','026/222333','Proleterska','50','Smederevo')
+
+INSERT INTO `clanovi`(`brClanskeKarte`, `ime`, `prezime`, `datumrodj`, `telefon`, `ulica`, `broj`)
+VALUES ('11112','Nemanja','Nemanjic','1988-12-24','064/111222','Kralja Petra','5'), 
+('11113','Ana','Anic','1989-02-24','064/222333','Kralja Milana','69')
+
+INSERT INTO `knjige`(`ISBN`, `naziv`, `jezik`, `izdavac`, `decijeID`, `naucnoID`, `pozajmnoID`) 
+VALUES ('1234','Bukvar decjih prava','srpski','Prosveta', 1, NULL, NULL),
+('4567','Na Drini cuprija','srpski','Laguna', NULL, NULL, 2),
+('1111','Istorija Starog Rima','srpskohrvatski','NOLIT', NULL, 1, NULL),
+('2222','Igra prestola','srpski','Laguna', NULL, NULL, 1)
+ 
+INSERT INTO `autori`( `ime`, `prezime`) 
+VALUES ('Ljubivoje','Rsumovic'), ('Ivo','Andric'),
+('N. A.',' Maskin'),  ('Dzordz R. R.',' Martin')
+
+INSERT INTO `bibliotekari`( `ime`, `prezime`, `telefon`, `ulica`, `broj`, `bibliotekaID`) 
+VALUES ('Rade','Rankovic','026/123321','Mostarska','14',1), 
+('Ljiljana','Knezevic','026/888999','16. Oktobra','6/14',2)
+
+INSERT INTO `izdavanja`( `datumizdavanja`, `datumvracanja`, `bibliotekarID`, `knjigaID`, `clanID`)
+ VALUES ('2023-04-01','2024-04-15',1,1,1), 
+('2023-03-01','2024-02-15',2,2,2)
+
+INSERT INTO `decijeodeljenje`( `uzrast`) 
+VALUES ('5-15'), ('5-15')
+
+INSERT INTO `naucnoodeljenje`(`naucnaOblast`) 
+VALUES ('Istorija'), ('Medicina')
+
+INSERT INTO `pozajmnoodeljenje`(`aktuelnost`, `zanr`) 
+VALUES ('najcitanije','Epska fantastika'), ('klasik','Istorijska fikcija')
+
+INSERT INTO `autoriknjige`( `autorID`, `knjigaID`) 
+VALUES (1,1), (2,2), (3,3), (4,4)
+
+INSERT INTO `clanovibiblioteke`( `datumupisa`, `bibliotekaID`, `clanID`) 
+VALUES ('2021-02-01',1,1), ('2022-03-02',1,2)
+
