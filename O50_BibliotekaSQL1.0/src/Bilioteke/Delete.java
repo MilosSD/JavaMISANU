@@ -29,7 +29,7 @@ public class Delete {
 			String insert = "DELETE FROM clanovi WHERE clanID = ?";
 
 			PreparedStatement ps = conn.prepareStatement(insert);
-			ps.setString(1, brClanske);
+			ps.setString(1, clanID);
 
 			int unos = ps.executeUpdate();
 			if (unos > 0)
